@@ -25,7 +25,7 @@ export default class BarChart extends React.Component {
       left: 40
     };
     var width = parseInt(d3.select(`#bar-chart-${id}`).style('width'), 10) - pad.left - pad.right;
-    var height = this.height = 400 - pad.top - pad.bottom;
+    var height = this.height = 700 - pad.top - pad.bottom;
 
 
     var svgEl = d3.select(`#bar-chart-${id}`).append('svg');
