@@ -1,0 +1,30 @@
+{
+  "name": "graph-that-shit",
+  "version": "0.0.1",
+  "description": "quick bar graph",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify --transform [ babelify --presets [ es2015 react ] ] --debug -p [ minifyify --map bundle.map.json --output bundle.map.json ] index.js -o bundle.js",
+    "start": "budo ./index.js --serve=bundle.js --live --open -- -t [ babelify --presets [ es2015 react ] ] | garnish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kelvinabrokwa/graph-that-shit.git"
+  },
+  "author": "Kelvin Abrokwa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kelvinabrokwa/graph-that-shit/issues"
+  },
+  "homepage": "https://github.com/kelvinabrokwa/graph-that-shit#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
+    "budo": "^8.3.0",
+    "garnish": "^5.2.0",
+    "minifyify": "^7.3.3"
+  }
+}
