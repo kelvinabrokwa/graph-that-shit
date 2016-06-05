@@ -10,7 +10,7 @@ export default class URLInput extends React.Component {
   }
   render() {
     return <div>
-      <input type='text' placeholder='fetch data' onChange={this.onChange.bind(this)}/>
+      <input style={{ height: '30px' }} className='full-width center' type='text' placeholder='fetch data from url' onChange={this.onChange.bind(this)}/>
     </div>;
   }
 }

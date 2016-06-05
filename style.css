@@ -47,3 +47,9 @@ input {
 input:focus {
   border-bottom: solid 1px #FFA02F;
 }
+
+.full-width { width: 100%; }
+
+.mb2 { margin-bottom: 20px; }
+
+.center { text-align: center; }

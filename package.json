@@ -26,5 +26,10 @@
     "budo": "^8.3.0",
     "garnish": "^5.2.0",
     "minifyify": "^7.3.3"
+  },
+  "dependencies": {
+    "dropzone": "^4.3.0",
+    "react": "^15.1.0",
+    "react-dropzone": "^3.5.0"
   }
 }
