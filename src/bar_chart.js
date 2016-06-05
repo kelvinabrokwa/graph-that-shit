@@ -23,12 +23,11 @@ export default class BarChart extends React.Component {
       left: 40
     };
     var width = parseInt(d3.select('#bar-chart').style('width'), 10) - pad.left - pad.right;
-    var height = 700 - pad.top - pad.bottom;
-
+    var height = this.height = 500 - pad.top - pad.bottom;
 
     var svgEl = d3.select('#bar-chart').append('svg');
     var svg = this.svg = svgEl
-        .attr('id', `bar-chart-svg`)
+        .attr('id', 'bar-chart-svg')
         .attr('width', width + pad.left + pad.right)
         .attr('height', height + pad.top + pad.bottom)
         .attr('class', 'chart')
@@ -91,18 +90,12 @@ export default class BarChart extends React.Component {
     y.domain([0, d3.max(data.map(d => d.y))]);
 
     // update axes
-    svg.selectAll(`.x-axis`)
+    svg.selectAll('.x.axis')
       .transition()
         .duration(300)
       .call(xAxis)
-      .selectAll('text')
-        .text(t => t ? t.substring(0, t.length <= 13 ? t.length - 1 : 12) : 'Null')
-        .attr('transform', 'rotate(-65)')
-        .attr('dx', '-.8em')
-        .attr('dy', '.15em')
-        .style('text-anchor', 'end');
 
-    svg.selectAll(`.y-axis`)
+    svg.selectAll('.y.axis')
       .transition()
         .duration(300)
       .call(yAxis);
@@ -119,7 +112,7 @@ export default class BarChart extends React.Component {
       .remove();
 
     bars.enter().append('rect')
-      .attr('class', `bar bar`)
+      .attr('class', 'bar')
       .attr('y', y(0))
       .attr('height', d => height - y(0));
 
@@ -137,6 +130,7 @@ export default class BarChart extends React.Component {
     labels.enter().append('text')
       .attr('class', `bar-label`);
 
+    // bar labels
     labels
       .transition()
         .duration(300)

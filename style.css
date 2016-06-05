@@ -35,3 +35,15 @@ rect:hover {
 .br { border-right: 1px solid #000; }
 
 .padx1 { padding: 0px 10px 0px 10px; }
+
+input {
+  border: 0px;
+  border-bottom: solid 1px #000;
+  outline: none;
+  width: 25%;
+  transition : border 300ms ease-out;
+}
+
+input:focus {
+  border-bottom: solid 1px #FFA02F;
+}

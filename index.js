@@ -1,25 +1,29 @@
 import BarChart from './src/bar_chart';
 import Table from './src/table';
-
-var data = [
-  { 'x': 'first', 'y': 1 },
-  { 'x': 'second', 'y': 2 },
-  { 'x': 'third', 'y': 3 },
-  { 'x': 'fourth', 'y': 4 },
-  { 'x': 'fifth', 'y': 5 },
-  { 'x': 'sixth', 'y': 6 }
-];
+import URLInput from './src/url_input';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    };
+  }
+  setData(data) {
+    this.setState({ data });
+  }
   render() {
     return <div className='limiter'>
       <div className='center'>graph that shit</div>
+      <div>
+        <URLInput setData={this.setData.bind(this)}/>
+      </div>
       <div className='flex'>
         <div className='flex-3'>
-          <BarChart data={data}/>
+          <BarChart data={this.state.data}/>
         </div>
         <div className='flex-1'>
-          <Table data={data}/>
+          <Table data={this.state.data}/>
         </div>
       </div>
     </div>;
