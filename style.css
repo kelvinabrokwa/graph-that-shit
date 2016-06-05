@@ -1,0 +1,37 @@
+html, body {
+  font-family: Menlo, consolas, monospace;
+}
+
+/**
+ * chart
+ */
+.axis path,
+.axis line {
+  shape-rendering: crispEdges;
+  stroke: #000;
+  fill: none;
+}
+rect {
+  fill: #00AFD8;
+}
+rect:hover {
+  fill: #FFA02F;
+}
+
+/**
+ * positioning
+ */
+.center { text-align: center; }
+.right { text-align: right; }
+.flex { display: flex; }
+.flex-1 { flex: 1; }
+.flex-3 { flex: 3; }
+
+.limiter {
+  width: 80%;
+  margin: 0 auto 0 auto;
+}
+
+.br { border-right: 1px solid #000; }
+
+.padx1 { padding: 0px 10px 0px 10px; }

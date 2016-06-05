@@ -10,27 +10,25 @@ export default class BarChart extends React.Component {
 
   constructor(props) {
     super(props);
-    this.yAxisLabel = props.yAxisLabel || '';
-    this.color = props.color || '#00AFD8';
   }
 
   componentDidMount() {
-    var { id, data } = this.props;
+    var { data } = this.props;
 
     // setup
     var pad = {
       top: 30,
-      bottom: 150,
+      bottom: 30,
       right: 40,
       left: 40
     };
-    var width = parseInt(d3.select(`#bar-chart-${id}`).style('width'), 10) - pad.left - pad.right;
-    var height = this.height = 700 - pad.top - pad.bottom;
+    var width = parseInt(d3.select('#bar-chart').style('width'), 10) - pad.left - pad.right;
+    var height = 700 - pad.top - pad.bottom;
 
 
-    var svgEl = d3.select(`#bar-chart-${id}`).append('svg');
+    var svgEl = d3.select('#bar-chart').append('svg');
     var svg = this.svg = svgEl
-        .attr('id', `bar-chart-svg-${id}`)
+        .attr('id', `bar-chart-svg`)
         .attr('width', width + pad.left + pad.right)
         .attr('height', height + pad.top + pad.bottom)
         .attr('class', 'chart')
@@ -54,52 +52,38 @@ export default class BarChart extends React.Component {
       .orient('left');
 
     svg.append('g')
-      .attr('class', `x axis x-axis-${id}`)
+      .attr('class', 'x axis')
       .attr('transform', `translate(0,${height})`)
       .call(xAxis)
-      .selectAll('text')
-        .text(t => t ? t.substring(0, t.length <= 13 ? t.length - 1 : 12) : 'Null')
-        .attr('transform', 'rotate(-65)')
-        .attr('dx', '-.8em')
-        .attr('dy', '.15em')
-        .style('text-anchor', 'end');
 
     svg.append('g')
-      .attr('class', `y axis y-axis-${id}`)
-      .call(yAxis)
-      .append('text')
-        .attr('transform', 'rotate(-90)')
-        .attr('y', 6)
-        .attr('dy', '.71em')
-        .style('text-anchor', 'end')
-        .attr('class', 'chart-text-gray')
-        .text(this.yAxisLabel);
-
+      .attr('class', 'y axis')
+      .call(yAxis);
 
     // bars
-    svg.selectAll(`.bar-${id}`)
-        .data(data, d => d.x)
+    svg.selectAll(`.bar`)
+        .data(data)
       .enter().append('rect')
         .attr('fill', '#00AFD8')
-        .attr('class', `bar bar-${id}`)
+        .attr('class', `bar bar`)
         .attr('x', d => x(d.x))
         .attr('width', x.rangeBand())
         .attr('y', d => y(d.y))
         .attr('height', d => height - y(d.y));
 
     // bar labels
-    svg.selectAll(`.bar-label-${id}`)
-        .data(data, d => d.x)
+    svg.selectAll(`.bar-label`)
+        .data(data)
       .enter().append('text')
         .text(d => d.y)
         .attr('x', d => x(d.x) + x.rangeBand() / 2)
         .attr('y', d => y(d.y) - 3)
-        .attr('class', `bar-label-${id}`)
+        .attr('class', `bar-label`)
         .style('text-anchor', 'middle');
   }
 
   componentWillReceiveProps(props) {
-    var { data, id } = props;
+    var { data } = props;
     var { x, y, svg, xAxis, yAxis, height } = this;
 
     // update scales
@@ -107,7 +91,7 @@ export default class BarChart extends React.Component {
     y.domain([0, d3.max(data.map(d => d.y))]);
 
     // update axes
-    svg.selectAll(`.x-axis-${id}`)
+    svg.selectAll(`.x-axis`)
       .transition()
         .duration(300)
       .call(xAxis)
@@ -118,13 +102,13 @@ export default class BarChart extends React.Component {
         .attr('dy', '.15em')
         .style('text-anchor', 'end');
 
-    svg.selectAll(`.y-axis-${id}`)
+    svg.selectAll(`.y-axis`)
       .transition()
         .duration(300)
       .call(yAxis);
 
     // update bars
-    var bars = svg.selectAll(`.bar-${id}`).data(data, d => d.x);
+    var bars = svg.selectAll(`.bar`).data(data, d => d.x);
 
     bars.exit()
       .transition()
@@ -135,9 +119,8 @@ export default class BarChart extends React.Component {
       .remove();
 
     bars.enter().append('rect')
-      .attr('class', `bar bar-${id}`)
+      .attr('class', `bar bar`)
       .attr('y', y(0))
-      .attr('fill', this.color)
       .attr('height', d => height - y(0));
 
     bars
@@ -149,10 +132,10 @@ export default class BarChart extends React.Component {
       .attr('height', d => height - y(d.y));
 
     // update labels
-    var labels = svg.selectAll(`.bar-label-${id}`).data(data, d => d.x);
+    var labels = svg.selectAll(`.bar-label`).data(data, d => d.x);
 
     labels.enter().append('text')
-      .attr('class', `bar-label-${id}`);
+      .attr('class', `bar-label`);
 
     labels
       .transition()
@@ -172,7 +155,7 @@ export default class BarChart extends React.Component {
 
   render() {
     return <div>
-      <div id={`bar-chart-${this.props.id}`}></div>
+      <div id='bar-chart'></div>
     </div>;
   }
 
